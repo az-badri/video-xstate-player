@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactPlayer from 'react-player';
 import { Button } from 'antd';
+import { Expand, Pause, Play, X as Exit } from "lucide-react";
 
 export const MiniPlayer = ({ state, send, context }) => {
     const isMini = state.matches('mini');
@@ -38,14 +39,23 @@ export const MiniPlayer = ({ state, send, context }) => {
             </div>
 
             <div style={{ marginTop: 8, display: 'flex', justifyContent: 'space-between' }}>
-                <Button size="small" onClick={() => send({ type: isPlaying ? 'PAUSE' : 'PLAY' })}>
-                    {isPlaying ? 'Пауза' : 'Играть'}
+                <Button size="small" onClick={(e) => {
+                    e.currentTarget.blur();
+                    send({ type: isPlaying ? 'PAUSE' : 'PLAY' })
+                }}>
+                    {isPlaying ? <Pause/> : <Play/>}
                 </Button>
-                <Button size="small" onClick={() => send({ type: 'TO_MODAL' })}>
-                    Увеличить
+                <Button size="small" onClick={(e) => {
+                    e.currentTarget.blur()
+                    send({ type: 'TO_MODAL' })
+                }}>
+                    <Expand />
                 </Button>
-                <Button size="small" onClick={() => send({ type: 'CLOSE_MINI' })}>
-                    Закрыть
+                <Button size="small" onClick={(e) => {
+                    e.currentTarget.blur();
+                    send({ type: 'CLOSE_MINI' });
+                }}>
+                    <Exit />
                 </Button>
             </div>
         </div>

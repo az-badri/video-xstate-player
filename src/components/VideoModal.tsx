@@ -1,6 +1,7 @@
 import { Modal, Button } from 'antd';
 import ReactPlayer from 'react-player';
 import { useEffect, useState } from 'react';
+import { Minimize2, Play, Pause } from "lucide-react";
 
 export const VideoModal = ({ state, send }) => {
     const isModal = state.matches('modal');
@@ -19,13 +20,16 @@ export const VideoModal = ({ state, send }) => {
             onCancel={() => send({ type: 'CLOSE_MODAL' })}
             footer={[
                 <Button key="mini" onClick={() => send({ type: 'TO_MINI' })}>
-                    Мини-плеер
+                    <Minimize2/>
                 </Button>,
                 <Button
                     key="playpause"
-                    onClick={() => send({ type: isPlaying ? 'PAUSE' : 'PLAY' })}
+                    onClick={(e) => {
+                        e.currentTarget.blur();
+                        send({ type: isPlaying ? 'PAUSE' : 'PLAY' })
+                    }}
                 >
-                    {isPlaying ? 'Пауза' : 'Играть'}
+                    {isPlaying ? <Pause/> : <Play/>}
                 </Button>
             ]}
 

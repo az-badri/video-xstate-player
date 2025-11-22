@@ -3,6 +3,8 @@ import { playerMachine } from '../PlayerMachine';
 import VideoModal from './VideoModal';
 import MiniPlayer from './MiniPlayer';
 import { Button } from 'antd';
+import { Play } from "lucide-react";
+
 
 export const PlayerRoot = () =>  {
     const [state, send] = useMachine(playerMachine);
@@ -12,7 +14,9 @@ export const PlayerRoot = () =>  {
             <h2>XState Видео Плеер</h2>
 
             <div style={{ display: 'flex', gap: 8 }}>
-                <Button onClick={() => send({ type: 'OPEN_MODAL' })}>Открыть плеер</Button>
+                <Button onClick={() => send({ type: 'OPEN_MODAL' })}>
+                    <Play/>Открыть плеер
+                </Button>
             </div>
 
             <VideoModal state={state} send={send} />
